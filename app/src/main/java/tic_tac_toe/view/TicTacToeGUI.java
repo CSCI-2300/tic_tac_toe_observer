@@ -5,8 +5,7 @@ import javax.swing.*;
 
 import tic_tac_toe.model.*;
 
-public class TicTacToeGUI
-{
+public class TicTacToeGUI {
    public TicTacToeGUI(TicTacToeBoard board) {
       TicTacToeButtons buttons = new TicTacToeButtons(board);
 
@@ -20,13 +19,13 @@ public class TicTacToeGUI
       // align the components of the main panel vertically
       mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
       // add some padding to the edges of the main panel
-      mainPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+      mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
       JLabel instructions = new JLabel("Your piece is O");
       instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
       mainPanel.add(instructions);
 
-      buttons.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+      buttons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
       // make the buttons panel "see-through"
       buttons.setOpaque(false);
       mainPanel.add(buttons);
@@ -38,7 +37,7 @@ public class TicTacToeGUI
 
       // an example of udating a button with X or O in the GUI
       TicTacToePiece x_piece = TicTacToePiece.X;
-      board.placeTicTacToePiece(1,1, x_piece);
+      board.placeTicTacToePiece(1, 1, x_piece);
       buttons.showBoard();
    }
 }
