@@ -7,6 +7,7 @@ public class TicTacToe
    public static void main(String []args)
    {
       TicTacToeBoard board = new TicTacToeBoard();
+      TicTacToeGUI gui = new TicTacToeGUI(board);
       TicTacToeTerminal terminal = new TicTacToeTerminal(board);
 
       TicTacToePiece []playerTicTacToePieces = {TicTacToePiece.X,TicTacToePiece.O};
