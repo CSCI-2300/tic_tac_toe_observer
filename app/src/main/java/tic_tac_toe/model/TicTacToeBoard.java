@@ -1,33 +1,28 @@
 package tic_tac_toe.model;
+
 import java.util.ArrayList;
 
-public class TicTacToeBoard
-{
+public class TicTacToeBoard {
    private int size;
-   private TicTacToePiece [][]pieces;
+   private TicTacToePiece[][] pieces;
    private ArrayList<Observer> observers = new ArrayList<Observer>();
 
-   public TicTacToeBoard()
-   {
+   public TicTacToeBoard() {
       this.size = 3;
       this.initTicTacToeBoard();
    }
-  
-   public TicTacToePiece getTicTacToePiece(int row, int col)
-   {
+
+   public TicTacToePiece getTicTacToePiece(int row, int col) {
       return this.pieces[row][col];
    }
 
-   public int getSize()
-   {
+   public int getSize() {
       return this.size;
    }
 
-   public boolean placeTicTacToePiece(int row, int col, TicTacToePiece piece)
-   {
+   public boolean placeTicTacToePiece(int row, int col, TicTacToePiece piece) {
       boolean success = false;
-      if (this.pieces[row][col] == null)
-      {
+      if (this.pieces[row][col] == null) {
          this.pieces[row][col] = piece;
          notifyObservers();
          success = true;
@@ -35,14 +30,10 @@ public class TicTacToeBoard
       return success;
    }
 
-   public boolean isFull()
-   {
-      for (int i = 0; i < this.size; i++)
-      {
-         for (int j = 0; j < this.size; j++)
-         {
-            if (this.pieces[i][j] == null)
-            {
+   public boolean isFull() {
+      for (int i = 0; i < this.size; i++) {
+         for (int j = 0; j < this.size; j++) {
+            if (this.pieces[i][j] == null) {
                return false;
             }
          }
@@ -50,15 +41,12 @@ public class TicTacToeBoard
       return true;
    }
 
-   public TicTacToePiece getWinner()
-   {
+   public TicTacToePiece getWinner() {
       TicTacToePiece winner = getRowWinner();
-      if (winner == null)
-      {
+      if (winner == null) {
          winner = getColumnWinner();
       }
-      if (winner == null)
-      {
+      if (winner == null) {
          winner = getDiagonalWinner();
       }
       return winner;
@@ -68,90 +56,73 @@ public class TicTacToeBoard
       observers.add(observer);
    }
 
-    public void unregister(Observer observer) {
-        observers.remove(observer);
-    }
+   public void unregister(Observer observer) {
+      observers.remove(observer);
+   }
 
-    public void notifyObservers() {
-        for(Observer o: observers) {
-            o.update();
-        }
-    }
+   public void notifyObservers() {
+      for (Observer o : observers) {
+         o.update();
+      }
+   }
 
-   private TicTacToePiece getRowWinner()
-   {
+   private TicTacToePiece getRowWinner() {
       TicTacToePiece rowWinner = null;
-      for(int i = 0; i < this.size; i++)
-      {
+      for (int i = 0; i < this.size; i++) {
          rowWinner = this.pieces[i][0];
-         for (int j = 0; j < this.size; j++)
-         {
-            if (this.pieces[i][j] != rowWinner)
-            {
+         for (int j = 0; j < this.size; j++) {
+            if (this.pieces[i][j] != rowWinner) {
                rowWinner = null;
                break;
             }
          }
-         if (rowWinner != null)
-         {
+         if (rowWinner != null) {
             break;
          }
       }
       return rowWinner;
    }
 
-   private TicTacToePiece getColumnWinner()
-   {
+   private TicTacToePiece getColumnWinner() {
       TicTacToePiece columnWinner = null;
-      for (int j = 0; j < this.size; j++)
-      {
+      for (int j = 0; j < this.size; j++) {
          columnWinner = this.pieces[0][j];
-         for (int i = 0; i < this.size; i++)
-         {
-            if(this.pieces[i][j] != columnWinner)
-            {
+         for (int i = 0; i < this.size; i++) {
+            if (this.pieces[i][j] != columnWinner) {
                columnWinner = null;
             }
          }
-         if (columnWinner != null)
-         {
+         if (columnWinner != null) {
             break;
          }
       }
       return columnWinner;
    }
 
-   private TicTacToePiece getDiagonalWinner()
-   {
+   private TicTacToePiece getDiagonalWinner() {
       TicTacToePiece diagonalWinner = this.pieces[0][0];
-     
+
       // check the top left to bottom right diagonal
-      for (int i = 0; i < this.size; i++)
-      {
-         if (this.pieces[i][i] != diagonalWinner)
-         {
+      for (int i = 0; i < this.size; i++) {
+         if (this.pieces[i][i] != diagonalWinner) {
             diagonalWinner = null;
          }
       }
-      if (diagonalWinner != null)
-      {
+      if (diagonalWinner != null) {
          return diagonalWinner;
       }
 
       // check the top right to bottom left diagonal
-      diagonalWinner = this.pieces[0][this.size-1];
-      for (int i = 0; i < this.size; i++)
-      {
-         if (this.pieces[i][this.size-1-i] != diagonalWinner)
-         {
+      diagonalWinner = this.pieces[0][this.size - 1];
+      for (int i = 0; i < this.size; i++) {
+         if (this.pieces[i][this.size - 1 - i] != diagonalWinner) {
             diagonalWinner = null;
          }
       }
       return diagonalWinner;
    }
 
-   private void initTicTacToeBoard()
-   {
+   private void initTicTacToeBoard() {
       this.pieces = new TicTacToePiece[this.size][this.size];
    }
 
