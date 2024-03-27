@@ -5,10 +5,16 @@ import javax.swing.*;
 
 import tic_tac_toe.model.*;
 
-public class TicTacToeGUI {
-   public TicTacToeGUI() {
-      TicTacToeBoard board = new TicTacToeBoard();
-      TicTacToeButtons buttons = new TicTacToeButtons(board);
+public class TicTacToeGUI implements Observer {
+
+   protected TicTacToeButtons buttons;
+   protected JLabel gameResults;
+   protected TicTacToeBoard board;
+
+   public TicTacToeGUI(TicTacToeBoard board) {
+      this.board = board;
+      this.buttons = new TicTacToeButtons(board);
+      board.register(this);
 
       JFrame mainFrame = new JFrame("Tic Tac Toe");
       mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,14 +37,26 @@ public class TicTacToeGUI {
       buttons.setOpaque(false);
       mainPanel.add(buttons);
 
+      this.gameResults = new JLabel(" ");
+      this.gameResults.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+      mainPanel.add(gameResults);
+
       mainFrame.add(mainPanel);
 
       mainFrame.pack();
       mainFrame.setVisible(true);
 
-      // an example of udating a button with X or O in the GUI
-      TicTacToePiece x_piece = TicTacToePiece.X;
-      board.placeTicTacToePiece(1, 1, x_piece);
       buttons.showBoard();
+   }
+
+   @Override
+   public void update() {
+      System.out.println("GUI update is called");
+      this.buttons.showBoard();
+      TicTacToePiece winner = board.getWinner();
+      if (winner != null) {
+         this.gameResults.setText("Winner is " + winner);
+      }
    }
 }

@@ -5,7 +5,7 @@ import javax.swing.*;
 
 import tic_tac_toe.model.*;
 
-public class TicTacToeButtons extends JPanel implements Observer {
+public class TicTacToeButtons extends JPanel{
    private TicTacToeBoard board;
    private JButton[] buttons;
 
@@ -24,12 +24,6 @@ public class TicTacToeButtons extends JPanel implements Observer {
       for (int i = 0; i < numButtons; i++) {
          this.add(buttons[i]);
       }
-      board.register(this);
-   }
-
-   @Override
-   public void update() {
-      showBoard();
    }
 
    public void showBoard() {
