@@ -6,7 +6,7 @@ import tic_tac_toe.view.*;
 public class TicTacToe {
    public static void main(String[] args) {
       TicTacToeBoard board = new TicTacToeBoard();
-      TicTacToeGUI gui = new TicTacToeGUI(board);
+      TicTacToeGUI gui = new TicTacToeGUI();
       TicTacToeTerminal terminal = new TicTacToeTerminal(board);
 
       TicTacToePiece[] playerTicTacToePieces = {TicTacToePiece.X, TicTacToePiece.O};

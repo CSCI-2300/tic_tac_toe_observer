@@ -6,7 +6,8 @@ import javax.swing.*;
 import tic_tac_toe.model.*;
 
 public class TicTacToeGUI {
-   public TicTacToeGUI(TicTacToeBoard board) {
+   public TicTacToeGUI() {
+      TicTacToeBoard board = new TicTacToeBoard();
       TicTacToeButtons buttons = new TicTacToeButtons(board);
 
       JFrame mainFrame = new JFrame("Tic Tac Toe");
